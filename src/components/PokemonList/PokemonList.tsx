@@ -18,15 +18,13 @@ const PokemonList: React.FC<Props> = ({ pokemon }) => {
           <Input icon='search' placeholder='Search for pokemon...' />
         </Menu.Item>
       </Menu>
-      <div style={{ marginTop: 100 }}>
-        <Container>
-          <Grid columns={3}>
-            <Grid.Row>
-              {list}
-            </Grid.Row>
-          </Grid>
-        </Container>
-      </div>
+      <Container className="pokemon-list-container">
+        <Grid columns={3}>
+          <Grid.Row>
+            {list}
+          </Grid.Row>
+        </Grid>
+      </Container>
     </div>
   );
 }

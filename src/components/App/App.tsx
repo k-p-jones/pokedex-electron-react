@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
-import PokemonList from './components/PokemonList/PokemonList';
-import PokeAPI from './data/PokeAPI';
-import Pokemon from './interfaces/Pokemon';
+import PokemonList from '../PokemonList/PokemonList';
+import PokeAPI from '../../data/PokeAPI';
+import Pokemon from '../../interfaces/Pokemon';
 
 const App: React.FC = () => {
   const [pokemon, setPokemon] = useState<Pokemon[]>([]);

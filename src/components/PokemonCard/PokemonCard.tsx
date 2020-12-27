@@ -19,7 +19,7 @@ const PokemonCard: React.FC<Props> = ({ pokemon }) => {
             src={pokemon.imageURL}
           />
         </div>
-        <h3 style={{ marginTop: 5, textTransform: 'uppercase' }} id={`header-${pokemon.name}`} >{pokemon.name}</h3>
+        <h3 className="pokemon-card-text" id={`header-${pokemon.name}`}>{pokemon.name}</h3>
       </div>
     </Grid.Column>
   )

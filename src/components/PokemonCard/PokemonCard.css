@@ -5,3 +5,8 @@
   cursor: pointer;
   text-align: center;
 }
+
+.pokemon-card-text {
+  margin-top: 5px;
+  text-transform: uppercase;
+}
