@@ -1,0 +1,14 @@
+.ui.menu .item:before {
+  background: none !important;
+}
+
+.ui.top.fixed.main-nav {
+  background-color:#ee5253;
+  border: none;
+  height: 80px;
+}
+
+.ui.top.fixed.main-nav input {
+  border: none;
+  height: 40px;
+}
