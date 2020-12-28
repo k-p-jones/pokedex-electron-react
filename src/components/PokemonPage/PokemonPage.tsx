@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Image, Menu, Icon, Grid, Container, Label } from 'semantic-ui-react';
+import { Image, Menu, Icon, Grid, Container, Label, Progress } from 'semantic-ui-react';
 import PokeAPI from '../../data/PokeAPI';
 import Pokemon from '../../interfaces/Pokemon';
 import './PokemonPage.css';
@@ -52,9 +52,13 @@ const PokemonPage: React.FC<Props> = (props) => {
   const stats = () => {
     const stats: any = []
     props.location.state.selectedPokemon.data.stats.forEach((s) => {
+      // Going off the top base stat which is Chanseys HP, could be more accurate.
+      // Move to its own component.
+      const percent = Math.ceil((s.base_stat / 250) * 100);
       stats.push(
         <div key={s.stat.name}>
-          {s.stat.name}: {s.base_stat}
+          <p className="pokemon-page-stat-label"><b>{s.stat.name}:</b> {s.base_stat}</p>
+          <Progress percent={percent} indicating />
         </div>
       )
     });
