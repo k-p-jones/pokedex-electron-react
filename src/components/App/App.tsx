@@ -4,6 +4,7 @@ import './App.css';
 import PokemonList from '../PokemonList/PokemonList';
 import PokeAPI from '../../data/PokeAPI';
 import Pokemon from '../../interfaces/Pokemon';
+import PokemonPage from '../PokemonPage/PokemonPage';
 
 const App: React.FC = () => {
   const [pokemon, setPokemon] = useState<Pokemon[]>([]);
@@ -17,6 +18,7 @@ const App: React.FC = () => {
     <React.Fragment>
       <Router>
         <Switch>
+          <Route path="/pokemon" component={PokemonPage} />
           <Route path="/" component={() => <PokemonList pokemon={pokemon} />} />
         </Switch>
       </Router>

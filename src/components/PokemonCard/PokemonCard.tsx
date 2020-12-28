@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Grid, Image } from 'semantic-ui-react';
 import COLORS from '../../consts/colors';
 import Pokemon from '../../interfaces/Pokemon';
@@ -13,14 +14,21 @@ const PokemonCard: React.FC<Props> = ({ pokemon }) => {
 
   return (
     <Grid.Column>
-      <div className="pokemon-card" style={{ backgroundColor: pokemon.color, color: textColor}}>
-        <div>
-          <Image
-            src={pokemon.imageURL}
-          />
+      <Link
+        to={{
+          pathname: "/pokemon",
+          state: {
+            selectedPokemon: pokemon
+          } 
+        }}
+      >
+        <div className="pokemon-card" style={{ backgroundColor: pokemon.color, color: textColor}}>
+            <Image
+              src={pokemon.imageURL}
+            />
+            <h3 className="pokemon-card-text" id={`header-${pokemon.name}`}>{pokemon.name}</h3>
         </div>
-        <h3 className="pokemon-card-text" id={`header-${pokemon.name}`}>{pokemon.name}</h3>
-      </div>
+      </Link>
     </Grid.Column>
   )
 }

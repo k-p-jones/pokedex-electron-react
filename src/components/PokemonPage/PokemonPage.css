@@ -1,0 +1,55 @@
+i.icon.arrow.left:before {
+  color: white;
+}
+
+i.icon.arrow.left:hover {
+  color: grey;
+}
+
+.pokemon-page-wrapper {
+  padding-top: 100px;
+  height: 400px;
+  background-image: url('../../images/pokeball.svg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 120% 40%;
+}
+
+.ui.top.fixed.pokemon-page-nav {
+  background-color: transparent;
+  border: none;
+  height: 80px;
+  box-shadow: none;
+}
+
+.pokemon-page-image-wrapper {
+  position: relative;
+}
+
+.pokemon-page-image-wrapper img {
+  position: absolute !important;
+  top: 70px;
+}
+
+.pokemon-page-title h1 {
+  color: white;
+  font-size: 42px;
+  font-weight: bold;
+}
+
+.pokemon-page-title h1::first-letter {
+  text-transform: uppercase;
+}
+
+.pokemon-page-info {
+  height: 800px;
+  background-color: white;
+  border-radius: 30px;
+  padding-top: 60px;
+}
+
+.ui.borderless.pointing.secondary.menu {
+  text-align: center;
+  justify-content: center;
+  flex-grow: 1;
+}
