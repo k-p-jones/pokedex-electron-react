@@ -3,6 +3,7 @@ import BaseApiResponse from '../interfaces/BaseApiResponse';
 import SpeciesApiResponse from '../interfaces/SpeciesApiResponse';
 import Pokemon from '../interfaces/Pokemon';
 import COLORS from '../consts/colors';
+import PokemonBaseType from '../interfaces/PokemonBaseType';
 
 class PokeAPI {
   fetchBasePokemon = () => {
@@ -17,7 +18,12 @@ class PokeAPI {
               name: data.name,
               speciesURL: data.url,
               dataURL: `https://pokeapi.co/api/v2/pokemon/${index + 1}`,
-              imageURL: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${index + 1}.png`
+              imageURL: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${index + 1}.png`,
+              data: {
+                types: [],
+                stats: [],
+              },
+              dataFetched: false
             }
             pokemon.push(obj);
           });
@@ -35,6 +41,20 @@ class PokeAPI {
         reject(error);
       }
     });
+  }
+
+  fetchPokemonData = (pokemon: Pokemon) => {
+    return new Promise<void>(async (resolve) => {
+      if (pokemon.dataFetched) { resolve() }
+      const response = await axios.get(pokemon.dataURL);
+      const types = response.data.types.map((t: PokemonBaseType) => {
+        return t.type;
+      });
+      pokemon.data.types = types;
+      pokemon.data.stats = response.data.stats;
+      pokemon.dataFetched = true;
+      resolve();
+    })
   }
 }
 

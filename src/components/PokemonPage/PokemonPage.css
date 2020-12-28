@@ -28,7 +28,7 @@ i.icon.arrow.left:hover {
 
 .pokemon-page-image-wrapper img {
   position: absolute !important;
-  top: 70px;
+  top: 10px;
 }
 
 .pokemon-page-title h1 {
@@ -52,4 +52,16 @@ i.icon.arrow.left:hover {
   text-align: center;
   justify-content: center;
   flex-grow: 1;
+}
+
+.ui.label.pokemon-page-type-label {
+  border-radius: 10px;
+  color: white;
+  filter: brightness(90%);
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.ui.label.pokemon-page-type-label::first-letter {
+  text-transform: uppercase;
 }

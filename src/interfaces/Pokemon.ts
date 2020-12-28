@@ -3,7 +3,18 @@ export default interface Pokemon {
   name: string;
   speciesURL: string;
   dataURL: string;
-  data?: object;
+  data: {
+    types: Array<{ name: string, url: string }> | [];
+    stats: Array<{
+      base_stat: number;
+      effort: number;
+      stat: {
+        name: string;
+        url: string;
+      }
+    }> | [];
+  };
   color?: string | 'white';
   imageURL: string;
+  dataFetched: boolean;
 }
