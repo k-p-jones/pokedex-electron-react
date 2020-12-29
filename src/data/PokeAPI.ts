@@ -23,7 +23,8 @@ class PokeAPI {
                 types: [],
                 stats: [],
               },
-              dataFetched: false
+              dataFetched: false,
+              typeDataFetched: false
             }
             pokemon.push(obj);
           });
@@ -55,6 +56,20 @@ class PokeAPI {
       pokemon.dataFetched = true;
       resolve();
     })
+  }
+
+  fetchTypeData = (pokemon: Pokemon) => {
+    return new Promise<void>(async (resolve) => {
+      if (pokemon.typeDataFetched) { return resolve() }
+      await Promise.all(
+        pokemon.data.types.map(async (type, index) => {
+          const response = await axios.get(type.url);
+          pokemon.data.types[index].data = response.data.damage_relations;
+        })
+      );
+      pokemon.typeDataFetched = true;
+      resolve();
+    });
   }
 }
 

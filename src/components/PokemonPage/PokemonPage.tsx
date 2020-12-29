@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { Image, Menu, Icon, Grid, Container, Label, Progress } from 'semantic-ui-react';
 import PokeAPI from '../../data/PokeAPI';
 import Pokemon from '../../interfaces/Pokemon';
+import BaseStatsPage from './BaseStatsPage/BaseStatsPage';
+import DamageStatsPage from './DamageStatsPage/DamageStatsPage';
 import './PokemonPage.css';
 
 interface Props {
@@ -15,7 +17,7 @@ interface Props {
 
 const PokemonPage: React.FC<Props> = (props) => {
   const [selectedPokemon, setSelectedPokemon] = useState<Pokemon>();
-  const [badges, setBadges] = useState<Array<[]>>([]);
+  const [badges, setBadges] = useState<JSX.Element[]>([]);
   const [pageIndex, setPageIndex] = useState<number>(0);
 
   useEffect(() => {
@@ -29,11 +31,7 @@ const PokemonPage: React.FC<Props> = (props) => {
     if (!selectedPokemon) { return }
 
     PokeAPI.fetchPokemonData(props.location.state.selectedPokemon).then(() => {
-      // :(
-      const labels: any = [];
-
-      selectedPokemon.data.types.forEach((t) => {
-        labels.push(
+      const labels = selectedPokemon.data.types.map((t) => (
           <Label
             key={`type-${t.name}`}
             className="pokemon-page-type-label"
@@ -41,40 +39,27 @@ const PokemonPage: React.FC<Props> = (props) => {
           >
             {t.name}
           </Label>
-        );
-      });
+      ));
 
       setBadges(labels)
     })
     
   }, [selectedPokemon, props.location.state.selectedPokemon])
 
-  const stats = () => {
-    const stats: any = []
-    props.location.state.selectedPokemon.data.stats.forEach((s) => {
-      // Going off the top base stat which is Chanseys HP, could be more accurate.
-      // Move to its own component.
-      const percent = Math.ceil((s.base_stat / 250) * 100);
-      stats.push(
-        <div key={s.stat.name}>
-          <p className="pokemon-page-stat-label"><b>{s.stat.name}:</b> {s.base_stat}</p>
-          <Progress percent={percent} indicating />
-        </div>
-      )
-    });
-    return stats
-  }
-
   const tabContent = () => {
     switch (pageIndex) {
       case 0:
-        return (stats())
+        return (
+          <BaseStatsPage pokemon={props.location.state.selectedPokemon} />
+        )
       case 1:
         return (<p>1</p>)
       case 2:
         return (<p>2</p>)
       case 3:
-        return (<p>3</p>)                
+        return (
+          <DamageStatsPage pokemon={props.location.state.selectedPokemon} />
+        )                
       default:
         break;
     }
