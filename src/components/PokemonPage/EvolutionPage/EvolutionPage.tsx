@@ -12,10 +12,10 @@ const EvolutionPage: React.FC<Props> = ({ pokemon }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [urls, setUrls] = useState<string[]>([]);
 
-  const getData: Function = useCallback((obj: { species: BasicObject, evolves_to: { species: BasicObject, evolves_to: any }[] }, arr: Array<string>) => {
+  const getData: Function = useCallback((obj: { species: BasicObject, evolves_to: { species: BasicObject, evolves_to: object[] }[] }, arr: Array<string>) => {
     const id = parseInt(obj.species.url.split('/').reverse()[1]);
-    // Some parts of the evolution chain appear to have been added after Gen 1
 
+    // Some parts of the evolution chain appear to have been added after Gen 1
     if (id <= 150) {
       const url = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
       arr.push(url)
