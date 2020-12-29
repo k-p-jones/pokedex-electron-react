@@ -19,12 +19,14 @@ class PokeAPI {
               speciesURL: data.url,
               dataURL: `https://pokeapi.co/api/v2/pokemon/${index + 1}`,
               imageURL: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${index + 1}.png`,
+              evolutionChainURL: '',
               data: {
                 types: [],
-                stats: [],
+                stats: []
               },
               dataFetched: false,
-              typeDataFetched: false
+              typeDataFetched: false,
+              evolutionChainFetched: false
             }
             pokemon.push(obj);
           });
@@ -34,6 +36,7 @@ class PokeAPI {
               const response = await axios.get(p.speciesURL);
               const data: SpeciesApiResponse = response.data;
               p.color = COLORS[data.color.name];
+              p.evolutionChainURL = data.evolution_chain.url;
             })
           );
           return resolve(pokemon);
@@ -70,6 +73,16 @@ class PokeAPI {
       pokemon.typeDataFetched = true;
       resolve();
     });
+  }
+
+  fetchEvolutionChain = (pokemon: Pokemon) => {
+    return new Promise<void>(async (resolve) => {
+      if (pokemon.evolutionChainFetched) { return resolve() }
+      const response = await axios.get(pokemon.evolutionChainURL)
+      pokemon.data.evolutionChain = response.data.chain;
+      pokemon.evolutionChainFetched = true;
+      resolve();
+    });    
   }
 }
 

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Image, Menu, Icon, Grid, Container, Label, Progress } from 'semantic-ui-react';
+import { Image, Menu, Icon, Grid, Container, Label } from 'semantic-ui-react';
 import PokeAPI from '../../data/PokeAPI';
 import Pokemon from '../../interfaces/Pokemon';
 import BaseStatsPage from './BaseStatsPage/BaseStatsPage';
 import DamageStatsPage from './DamageStatsPage/DamageStatsPage';
+import EvolutionPage from './EvolutionPage/EvolutionPage';
 import './PokemonPage.css';
 
 interface Props {
@@ -40,7 +41,6 @@ const PokemonPage: React.FC<Props> = (props) => {
             {t.name}
           </Label>
       ));
-
       setBadges(labels)
     })
     
@@ -53,7 +53,9 @@ const PokemonPage: React.FC<Props> = (props) => {
           <BaseStatsPage pokemon={props.location.state.selectedPokemon} />
         )
       case 1:
-        return (<p>1</p>)
+        return (
+          <EvolutionPage pokemon={props.location.state.selectedPokemon} />
+        )
       case 2:
         return (<p>2</p>)
       case 3:

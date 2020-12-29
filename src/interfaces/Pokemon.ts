@@ -8,6 +8,7 @@ export default interface Pokemon {
   name: string;
   speciesURL: string;
   dataURL: string;
+  evolutionChainURL: string;
   data: {
     types: {
       name: string,
@@ -26,9 +27,19 @@ export default interface Pokemon {
       effort: number;
       stat: BasicObject;
     }[];
+    evolutionChain?: {
+      chain: {
+        evolves_to: {
+          species: BasicObject;
+          evolves_to: object[];
+        }[];
+        species: BasicObject;
+      }
+    };
   };
   color?: string | 'white';
   imageURL: string;
   dataFetched: boolean;
   typeDataFetched: boolean;
+  evolutionChainFetched: boolean;
 }
