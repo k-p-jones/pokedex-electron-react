@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Loader, Image } from 'semantic-ui-react';
+import { Loader, Image, Grid } from 'semantic-ui-react';
 import PokeAPI from '../../../data/PokeAPI';
 import BasicObject from '../../../interfaces/BasicObject';
 import Pokemon from '../../../interfaces/Pokemon';
+import './EvolutionPage.css';
 
 interface Props {
   pokemon: Pokemon;
@@ -10,15 +11,17 @@ interface Props {
 
 const EvolutionPage: React.FC<Props> = ({ pokemon }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [urls, setUrls] = useState<string[]>([]);
+  const [chainLinks, setChainLinks] = useState<BasicObject[]>([]);
 
-  const getData: Function = useCallback((obj: { species: BasicObject, evolves_to: { species: BasicObject, evolves_to: object[] }[] }, arr: Array<string>) => {
+  const getData: Function = useCallback((obj: { species: BasicObject, evolves_to: { species: BasicObject, evolves_to: object[] }[] }, arr: BasicObject[]) => {
     const id = parseInt(obj.species.url.split('/').reverse()[1]);
-
+    const chainLink: BasicObject = { name: '', url: '' };
     // Some parts of the evolution chain appear to have been added after Gen 1
     if (id <= 150) {
       const url = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
-      arr.push(url)
+      chainLink.name = obj.species.name;
+      chainLink.url = url;
+      arr.push(chainLink)
     }
 
     if (obj.evolves_to.length === 0) { return arr }
@@ -27,7 +30,7 @@ const EvolutionPage: React.FC<Props> = ({ pokemon }) => {
   }, []);
 
   const getChainData: any = useCallback((chain: any) => {
-    const arr: Array<string> = [];
+    const arr: BasicObject[] = [];
     const result = getData(chain, arr);
     return result;
   }, [getData]);
@@ -35,19 +38,31 @@ const EvolutionPage: React.FC<Props> = ({ pokemon }) => {
   useEffect(() => {
     PokeAPI.fetchEvolutionChain(pokemon).then(() => {
       const chain = getChainData(pokemon.data.evolutionChain);
-      setUrls(chain);
+      setChainLinks(chain);
       setIsLoading(false);
     });
   }, [pokemon, pokemon.evolutionChainFetched, getChainData])
 
   const pageContent = () => {
-    return urls.map(url => <Image src={url} key={url}/>)
+    return chainLinks.map(obj => {
+        return (
+          <Grid.Column key={obj.url} className="evolution-page-link-wrapper">
+            <Image src={obj.url} />
+            <p className="evolution-page-link-name">{obj.name}</p>
+          </Grid.Column>
+        )
+      }
+    )
   }
 
   if (isLoading) { return <Loader /> }
 
   return (
-    <div>{pageContent()}</div>
+    <Grid>
+      <Grid.Row columns={3} centered>
+        {pageContent()}
+      </Grid.Row>
+    </Grid>
   );
 }
 

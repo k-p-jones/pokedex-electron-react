@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Image, Menu, Icon, Grid, Container, Label } from 'semantic-ui-react';
 import PokeAPI from '../../data/PokeAPI';
@@ -21,6 +21,10 @@ const PokemonPage: React.FC<Props> = (props) => {
   const [badges, setBadges] = useState<JSX.Element[]>([]);
   const [pageIndex, setPageIndex] = useState<number>(0);
 
+  const determineBgColor = useCallback(() => {
+    return selectedPokemon?.color === '#fff' ? 'grey' : selectedPokemon?.color;
+  }, [selectedPokemon?.color])
+
   useEffect(() => {
     window.scrollTo(0, 0);
     setSelectedPokemon(props.location.state.selectedPokemon);
@@ -36,7 +40,7 @@ const PokemonPage: React.FC<Props> = (props) => {
           <Label
             key={`type-${t.name}`}
             className="pokemon-page-type-label"
-            style={{ backgroundColor: selectedPokemon.color }}
+            style={{ backgroundColor: determineBgColor() }}
           >
             {t.name}
           </Label>
@@ -44,7 +48,7 @@ const PokemonPage: React.FC<Props> = (props) => {
       setBadges(labels)
     })
     
-  }, [selectedPokemon, props.location.state.selectedPokemon])
+  }, [selectedPokemon, props.location.state.selectedPokemon, determineBgColor])
 
   const tabContent = () => {
     switch (pageIndex) {
@@ -57,8 +61,6 @@ const PokemonPage: React.FC<Props> = (props) => {
           <EvolutionPage pokemon={props.location.state.selectedPokemon} />
         )
       case 2:
-        return (<p>2</p>)
-      case 3:
         return (
           <DamageStatsPage pokemon={props.location.state.selectedPokemon} />
         )                
@@ -77,7 +79,7 @@ const PokemonPage: React.FC<Props> = (props) => {
           </Link>
         </Menu.Item>
       </Menu>
-        <div style={{ backgroundColor: selectedPokemon?.color}}>
+        <div style={{ backgroundColor: determineBgColor() }}>
           <div className="pokemon-page-wrapper">
             <Container>
               <div className="pokemon-page-title">
@@ -109,14 +111,9 @@ const PokemonPage: React.FC<Props> = (props) => {
                   onClick={() => setPageIndex(1)}
                 />
                 <Menu.Item
-                  name='Moves'
+                  name='Type Stats'
                   active={pageIndex === 2}
                   onClick={() => setPageIndex(2)}
-                />
-                <Menu.Item
-                  name='Type Stats'
-                  active={pageIndex === 3}
-                  onClick={() => setPageIndex(3)}
                 />
               </Menu>
               {tabContent()}

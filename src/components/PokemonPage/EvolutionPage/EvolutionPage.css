@@ -1,0 +1,11 @@
+p.evolution-page-link-name {
+  text-align: center;
+}
+
+p.evolution-page-link-name::first-letter {
+  text-transform: uppercase;
+}
+
+div.column.evolution-page-link-wrapper {
+  margin-top: 40px !important;
+}
