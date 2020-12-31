@@ -20,10 +20,6 @@ const PokemonList: React.FC<Props> = ({ pokemon }) => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value);
 
-  useEffect(() => {
-    console.log(searchTerm);
-  }, [searchTerm])
-
   return (
     <div>
       <Menu fixed="top" className="main-nav">
