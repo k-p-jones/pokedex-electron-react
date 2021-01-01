@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Grid, Menu, Input, Container } from 'semantic-ui-react';
 import Pokemon from '../../interfaces/Pokemon';
 import PokemonCard from '../PokemonCard/PokemonCard';
