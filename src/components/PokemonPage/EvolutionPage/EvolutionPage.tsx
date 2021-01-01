@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Loader, Image, Grid } from 'semantic-ui-react';
+import { Image, Grid } from 'semantic-ui-react';
 import PokeAPI from '../../../data/PokeAPI';
 import BasicObject from '../../../interfaces/BasicObject';
 import Pokemon from '../../../interfaces/Pokemon';
+import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
 import './EvolutionPage.css';
 
 interface Props {
@@ -55,7 +56,7 @@ const EvolutionPage: React.FC<Props> = ({ pokemon }) => {
     )
   }
 
-  if (isLoading) { return <Loader /> }
+  if (isLoading) { return <LoadingSpinner /> }
 
   return (
     <Grid>

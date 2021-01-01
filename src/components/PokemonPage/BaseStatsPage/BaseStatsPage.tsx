@@ -1,12 +1,14 @@
 import React from 'react';
 import { Progress } from 'semantic-ui-react';
 import Pokemon from '../../../interfaces/Pokemon';
+import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
 
 interface Props {
   pokemon: Pokemon;
+  isLoading: boolean;
 }
 
-const BaseStatsPage: React.FC<Props> = ({ pokemon }) => {
+const BaseStatsPage: React.FC<Props> = ({ pokemon, isLoading }) => {
   const statBars = pokemon.data.stats.map((s) => {
     // Going off the top base stat which is Chanseys HP, could be more accurate.
     const percent = Math.ceil((s.base_stat / 250) * 100);
@@ -18,8 +20,10 @@ const BaseStatsPage: React.FC<Props> = ({ pokemon }) => {
     )
   })
 
+  const pageContent = () => isLoading ? <LoadingSpinner /> : statBars;
+
   return (
-    <div>{statBars}</div>
+    <div>{pageContent()}</div>
   );
 }
 

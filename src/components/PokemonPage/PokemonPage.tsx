@@ -20,6 +20,7 @@ const PokemonPage: React.FC<Props> = (props) => {
   const [selectedPokemon, setSelectedPokemon] = useState<Pokemon>();
   const [badges, setBadges] = useState<JSX.Element[]>([]);
   const [pageIndex, setPageIndex] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const determineBgColor = useCallback(() => {
     return selectedPokemon?.color === '#fff' ? 'grey' : selectedPokemon?.color;
@@ -34,7 +35,7 @@ const PokemonPage: React.FC<Props> = (props) => {
     // I feel like I am working around TS here. Need to pass the
     // Pokemon into the component directly.
     if (!selectedPokemon) { return }
-
+    setIsLoading(true)
     PokeAPI.fetchPokemonData(props.location.state.selectedPokemon).then(() => {
       const labels = selectedPokemon.data.types.map((t) => (
           <Label
@@ -46,6 +47,7 @@ const PokemonPage: React.FC<Props> = (props) => {
           </Label>
       ));
       setBadges(labels)
+      setIsLoading(false);
     })
     
   }, [selectedPokemon, props.location.state.selectedPokemon, determineBgColor])
@@ -54,7 +56,7 @@ const PokemonPage: React.FC<Props> = (props) => {
     switch (pageIndex) {
       case 0:
         return (
-          <BaseStatsPage pokemon={props.location.state.selectedPokemon} />
+          <BaseStatsPage pokemon={props.location.state.selectedPokemon} isLoading={isLoading} />
         )
       case 1:
         return (

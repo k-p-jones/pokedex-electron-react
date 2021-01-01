@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Loader, Segment } from 'semantic-ui-react';
+import { Segment } from 'semantic-ui-react';
 import PokeAPI from '../../../data/PokeAPI';
 import BasicObject from '../../../interfaces/BasicObject';
 import Pokemon from '../../../interfaces/Pokemon';
+import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
 import './DamageStatsPage.css';
 
 interface Props {
@@ -122,7 +123,7 @@ const DamageStatsPage: React.FC<Props> = ({ pokemon }) => {
   )
 
   if (isLoading) {
-    return <Loader />
+    return <LoadingSpinner />
   }
 
   return (<React.Fragment>{damageStats()}</React.Fragment>)
