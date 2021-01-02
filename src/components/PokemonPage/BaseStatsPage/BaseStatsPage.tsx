@@ -14,7 +14,7 @@ const BaseStatsPage: React.FC<Props> = ({ pokemon, isLoading }) => {
     const percent = Math.ceil((s.base_stat / 250) * 100);
     return (
       <div key={s.stat.name}>
-        <p className="pokemon-page-stat-label"><b>{s.stat.name}:</b> {s.base_stat}</p>
+        <p className="pokemon-page-stat-label" data-test-id={s.stat.name}><b>{s.stat.name}:</b> {s.base_stat}</p>
         <Progress percent={percent} indicating />
       </div>
     )
