@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders correctly 1`] = `
+<div>
+  <div
+    class="column"
+  >
+    <a
+      href="/pokemon"
+    >
+      <div
+        class="pokemon-card"
+        style="background-color: green; color: rgb(255, 255, 255);"
+      >
+        <img
+          class="ui image"
+          src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
+        />
+        <h3
+          class="pokemon-card-text"
+          id="header-bulbasaur"
+        >
+          bulbasaur
+        </h3>
+      </div>
+    </a>
+  </div>
+</div>
+`;
