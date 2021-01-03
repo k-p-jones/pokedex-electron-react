@@ -1,0 +1,168 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it displays the content 1`] = `
+<div>
+  <div
+    class="ui segment"
+  >
+    <h1
+      class="damage-stats-page-type-header"
+    >
+      poison
+    </h1>
+    <h3>
+      Strong Attacking (2x Damage)
+    </h3>
+    <ul>
+      <li>
+        grass
+      </li>
+      <li>
+        fairy
+      </li>
+    </ul>
+    <h3>
+      Strong Defending (1/2 Damage)
+    </h3>
+    <ul>
+      <li>
+        fighting
+      </li>
+      <li>
+        poison
+      </li>
+      <li>
+        bug
+      </li>
+      <li>
+        grass
+      </li>
+      <li>
+        fairy
+      </li>
+    </ul>
+    <h3>
+      Weak Attacking (1/2 Damage)
+    </h3>
+    <ul>
+      <li>
+        poison
+      </li>
+      <li>
+        ground
+      </li>
+      <li>
+        rock
+      </li>
+      <li>
+        ghost
+      </li>
+    </ul>
+    <h3>
+      Weak Attacking (No Damage)
+    </h3>
+    <ul>
+      <li>
+        steel
+      </li>
+    </ul>
+    <h3>
+      Weak Defending (2x Damage)
+    </h3>
+    <ul>
+      <li>
+        ground
+      </li>
+      <li>
+        psychic
+      </li>
+    </ul>
+  </div>
+  <div
+    class="ui segment"
+  >
+    <h1
+      class="damage-stats-page-type-header"
+    >
+      grass
+    </h1>
+    <h3>
+      Strong Attacking (2x Damage)
+    </h3>
+    <ul>
+      <li>
+        ground
+      </li>
+      <li>
+        rock
+      </li>
+      <li>
+        water
+      </li>
+    </ul>
+    <h3>
+      Strong Defending (1/2 Damage)
+    </h3>
+    <ul>
+      <li>
+        ground
+      </li>
+      <li>
+        water
+      </li>
+      <li>
+        grass
+      </li>
+      <li>
+        electric
+      </li>
+    </ul>
+    <h3>
+      Weak Attacking (1/2 Damage)
+    </h3>
+    <ul>
+      <li>
+        flying
+      </li>
+      <li>
+        poison
+      </li>
+      <li>
+        bug
+      </li>
+      <li>
+        steel
+      </li>
+      <li>
+        fire
+      </li>
+      <li>
+        grass
+      </li>
+      <li>
+        dragon
+      </li>
+    </ul>
+    <h3>
+      Weak Defending (2x Damage)
+    </h3>
+    <ul>
+      <li>
+        flying
+      </li>
+      <li>
+        poison
+      </li>
+      <li>
+        bug
+      </li>
+      <li>
+        fire
+      </li>
+      <li>
+        ice
+      </li>
+    </ul>
+  </div>
+</div>
+`;

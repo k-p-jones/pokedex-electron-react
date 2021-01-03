@@ -82,7 +82,7 @@ class PokeAPI {
       pokemon.data.evolutionChain = response.data.chain;
       pokemon.evolutionChainFetched = true;
       resolve();
-    });    
+    });
   }
 }
 
